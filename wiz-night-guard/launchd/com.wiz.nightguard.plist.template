@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.wiz.nightguard</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>__CAFFEINATE__</string>
+        <string>-is</string>
+        <string>__PYTHON3__</string>
+        <string>__WIZ_GUARD__</string>
+        <string>run</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>__START_HOUR__</integer>
+        <key>Minute</key>
+        <integer>__START_MINUTE__</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>__LOG_PATH__</string>
+    <key>StandardErrorPath</key>
+    <string>__LOG_PATH__</string>
+</dict>
+</plist>
