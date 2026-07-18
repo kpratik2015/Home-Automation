@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+SELF="$0"
+while [ -L "$SELF" ]; do
+  DIR="$(cd "$(dirname "$SELF")" && pwd)"
+  SELF="$(readlink "$SELF")"
+  [[ "$SELF" != /* ]] && SELF="$DIR/$SELF"
+done
+SCRIPT_DIR="$(cd "$(dirname "$SELF")/.." && pwd)"
 exec python3 "$SCRIPT_DIR/wiz_guard.py" "$@"
