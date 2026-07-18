@@ -2,5 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 **/config.local.py
+**/config.local.php
+**/fan-queue/data/
 *.log
 state.json

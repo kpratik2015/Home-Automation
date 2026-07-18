@@ -1,0 +1,16 @@
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
+
+<Files "config.local.php">
+    Require all denied
+</Files>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^data/ - [F,L]
+    RewriteCond %{HTTP:Signature} !^$
+    RewriteRule .* - [E=HTTP_SIGNATURE:%{HTTP:Signature}]
+    RewriteCond %{HTTP:SignatureCertChainUrl} !^$
+    RewriteRule .* - [E=HTTP_SIGNATURECERTCHAINURL:%{HTTP:SignatureCertChainUrl}]
+</IfModule>

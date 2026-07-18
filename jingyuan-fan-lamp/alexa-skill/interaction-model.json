@@ -1,0 +1,59 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "living room",
+      "intents": [
+        {
+          "name": "TurnOnFan",
+          "samples": [
+            "turn on the fan",
+            "turn the fan on",
+            "fan on",
+            "switch on the fan",
+            "start the fan"
+          ]
+        },
+        {
+          "name": "TurnOffFan",
+          "samples": [
+            "turn off the fan",
+            "turn the fan off",
+            "switch the fan off",
+            "shut off the fan",
+            "fans off"
+          ]
+        },
+        {
+          "name": "TurnOnLight",
+          "samples": [
+            "turn on the light",
+            "turn the light on",
+            "light on",
+            "switch on the light"
+          ]
+        },
+        {
+          "name": "TurnOffLight",
+          "samples": [
+            "turn off the light",
+            "turn the light off",
+            "light off",
+            "switch off the light"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+case "${1:-}" in
+  start)
+    exec python3 "$ROOT/bridge_server.py"
+    ;;
+  health)
+    exec curl -s "http://127.0.0.1:8787/health"
+    ;;
+  *)
+    exec python3 "$ROOT/fan_ble.py" "$@"
+    ;;
+esac

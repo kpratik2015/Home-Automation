@@ -1,0 +1,55 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sslCertificateType": "Wildcard",
+          "uri": "https://pratikkataria.com/home-automation/fan-queue/skill.php"
+        },
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "publishingInformation": {
+      "locales": {
+        "en-IN": {
+          "name": "Hall Fan Light",
+          "summary": "Control hall fan and light via BLE bridge",
+          "description": "Custom skill for hall fan and chandelier light. Requires Mac BLE bridge polling the command queue.",
+          "examplePhrases": [
+            "Alexa, ask living room to turn on the fan",
+            "Alexa, ask living room to turn off the light"
+          ],
+          "keywords": []
+        },
+        "en-US": {
+          "name": "Hall Fan Light",
+          "summary": "Control hall fan and light via BLE bridge",
+          "description": "Custom skill for hall fan and chandelier light. Requires Mac BLE bridge polling the command queue.",
+          "examplePhrases": [
+            "Alexa, ask living room to turn on the fan",
+            "Alexa, ask living room to turn off the light"
+          ],
+          "keywords": []
+        }
+      },
+      "isAvailableWorldwide": true,
+      "distributionCountries": []
+    },
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "en-IN": {
+          "privacyPolicyUrl": "https://pratikkataria.com/privacy-policy/"
+        },
+        "en-US": {
+          "privacyPolicyUrl": "https://pratikkataria.com/privacy-policy/"
+        }
+      }
+    }
+  }
+}
