@@ -53,14 +53,37 @@ def state_path(config) -> Path:
     return config.STATE_DIR / "state.json"
 
 
+def default_state() -> dict[str, Any]:
+    return {
+        "armed": False,
+        "paused_until": 0,
+        "last_guard_off_at": 0,
+        "window_key": "",
+    }
+
+
 def load_state(config) -> dict[str, Any]:
     path = state_path(config)
     if not path.exists():
-        return {"armed": False, "paused_until": 0, "last_guard_off_at": 0}
+        return default_state()
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        state = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
-        return {"armed": False, "paused_until": 0, "last_guard_off_at": 0}
+        return default_state()
+    for key, value in default_state().items():
+        state.setdefault(key, value)
+    return state
+
+
+def current_window_key() -> str:
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+def begin_window(config, state: dict[str, Any]) -> dict[str, Any]:
+    state["armed"] = False
+    state["window_key"] = current_window_key()
+    save_state(config, state)
+    return state
 
 
 def save_state(config, state: dict[str, Any]) -> None:
@@ -126,6 +149,7 @@ def cmd_status(config) -> int:
     print(f"bulb_ip:      {config.BULB_IP}")
     print(f"night_window: {config.NIGHT_START} - {config.NIGHT_END}")
     print(f"in_window:    {window}")
+    print(f"window_key:   {state.get('window_key', '') or '(none)'}")
     print(f"armed:        {state.get('armed', False)}")
     print(f"paused:       {paused}")
     if paused:
@@ -165,7 +189,11 @@ def run_loop(config, dry_run: bool, force_window: bool) -> int:
         "INFO",
         f"Starting guard (dry_run={dry_run}, force_window={force_window})",
     )
+    state = begin_window(config, load_state(config))
+    log_line(config, "INFO", f"Night window opened ({state['window_key']}); disarmed until first off")
     was_paused = False
+    prev_bulb_on: bool | None = None
+    waiting_logged = False
 
     while force_window or in_night_window(config):
         state = load_state(config)
@@ -185,12 +213,18 @@ def run_loop(config, dry_run: bool, force_window: bool) -> int:
             continue
 
         if not state.get("armed", False):
-            if not bulb_on:
+            if bulb_on:
+                if not waiting_logged:
+                    log_line(config, "INFO", "Monitoring; waiting for bulb to turn off before arming")
+                    waiting_logged = True
+            elif prev_bulb_on is None or prev_bulb_on:
                 state["armed"] = True
                 save_state(config, state)
-                log_line(config, "INFO", "Bulb off; guard armed")
-            else:
-                log_line(config, "INFO", "Waiting for bulb to turn off before arming")
+                waiting_logged = False
+                if prev_bulb_on:
+                    log_line(config, "INFO", "Bulb turned off; guard armed")
+                else:
+                    log_line(config, "INFO", "Bulb already off at window start; guard armed")
         elif bulb_on:
             reason = "pause ended" if pause_just_ended else "bulb on while armed"
             log_line(config, "INFO", f"Forcing off ({reason})")
@@ -199,6 +233,7 @@ def run_loop(config, dry_run: bool, force_window: bool) -> int:
                 state["last_guard_off_at"] = int(time.time())
                 save_state(config, state)
 
+        prev_bulb_on = bulb_on
         time.sleep(config.POLL_SECONDS)
 
     state = load_state(config)

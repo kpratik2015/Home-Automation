@@ -5,8 +5,8 @@ Forces a WiZ bulb off during overnight power blips after you have turned it off 
 ## How it works
 
 1. Runs daily from `NIGHT_START` to `NIGHT_END` (default 1:00 AM - 10:00 AM)
-2. **Waiting:** does not force the light off at window start
-3. **Armed:** after the bulb is off, any turn-on is forced off (unless paused)
+2. **Monitoring:** at window start, always disarms and watches without forcing off
+3. **Armed:** after the bulb is off for the first time in the window (turn-off, or already off at window start)
 4. **Pause:** use CLI before intentional night use; when pause ends with light still on, guard forces off again
 
 ## Setup
