@@ -61,7 +61,7 @@ sequenceDiagram
   participant Mac as MacBridge
   participant Fan as Chandelier
 
-  Echo->>Alexa: ask living room to turn on the fan
+  Echo->>Alexa: ask center lamp to turn on the fan
   Alexa->>Host: POST skill.php
   Host->>Host: enqueue fan-on
   loop every 2s
@@ -77,10 +77,13 @@ sequenceDiagram
 
 ## Alexa
 
-Custom skill invocation **`living room`** (not Smart Home):
+Custom skill invocation **`center lamp`** (not Smart Home):
 
-- *"Alexa, ask living room to turn on the fan"*
-- *"Alexa, ask living room to turn off the light"*
+- *"Alexa, ask center lamp to turn on the fan"*
+- *"Alexa, ask center lamp to turn on the light"*
+- *"Alexa, ask center lamp to switch the light off"*
+
+Light off: use **switch the light off** (not "turn off the light" - hits StopIntent).
 
 Setup: [`alexa-skill/README.md`](alexa-skill/README.md)
 

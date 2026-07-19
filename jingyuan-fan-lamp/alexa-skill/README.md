@@ -6,7 +6,7 @@ Personal custom skill - no AWS Lambda. HTTPS endpoint is PHP on your hosting.
 
 1. Open [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
 2. **Create Skill** → Custom → Provision your own → Host skill in Alexa-hosted (No) → Create skill manually
-3. **Invocation name:** `living room` (must match [`interaction-model.json`](interaction-model.json); Alexa requires 2+ words)
+3. **Invocation name:** `center lamp` (must match [`interaction-model.json`](interaction-model.json); Alexa requires 2+ words)
 
 ## 2. Interaction model
 
@@ -33,16 +33,34 @@ Alexa app → **More** → **Skills & Games** → **Your Skills** → **Dev** �
 
 ## Voice phrases
 
-Custom skill phrasing (not Smart Home):
+Custom skill only works with **ask/tell + center lamp** (not "turn on the light"):
 
-- *"Alexa, ask living room to turn on the fan"*
-- *"Alexa, ask living room to turn off the fan"*
-- *"Alexa, ask living room to turn on the light"*
-- *"Alexa, ask living room to turn off the light"*
+- *"Alexa, ask center lamp to turn on the fan"*
+- *"Alexa, ask center lamp to turn off the fan"*
+- *"Alexa, ask center lamp to turn on the light"*
+- *"Alexa, ask center lamp to switch the light off"*
 
-Natural *"Alexa, turn on living room fan"* needs a Smart Home skill (out of scope).
+For **off** commands avoid *turn off* - Alexa may match StopIntent instead.
+
+Natural *"Alexa, turn on the fan"* needs a Smart Home skill (out of scope).
+
+## en-IN
+
+Add **English (India)** under skill Languages and rebuild the model for each locale you use.
 
 ## Troubleshooting
+
+### "A few things share the name light/fan"
+
+Alexa is **not** using your skill - it is searching Smart Home devices.
+
+1. Enable dev skill: Alexa app → Skills → **Your Skills** → **Dev** → enable skill
+2. Same Amazon account as Developer Console
+3. Say full phrase: *"Alexa, ask center lamp to turn on the fan"*
+4. For light off: *"ask center lamp to **switch the light off**"* (not "turn off the light")
+5. Test on **Echo Dot** if phone app keeps failing (app is pickier)
+
+### Other issues
 
 | Issue | Check |
 |-------|--------|

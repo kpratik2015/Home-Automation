@@ -9,6 +9,6 @@ DEBOUNCE_SECONDS = 1.5
 QUEUE_ENABLED = True
 QUEUE_BASE_URL = "https://pratikkataria.com/home-automation/fan-queue"
 QUEUE_DEQUEUE_TOKEN = "change-me-dequeue-token"
-POLL_INTERVAL_SECONDS = 2.0
+POLL_INTERVAL_SECONDS = 3.0
 
 STATE_DIR = Path.home() / ".local/share/jingyuan-fan-lamp"

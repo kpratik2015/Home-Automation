@@ -47,7 +47,7 @@ $commandMap = [
 ];
 
 if ($intentName === 'AMAZON.HelpIntent') {
-    alexa_respond('Say turn on the fan or turn off the fan.', true);
+    alexa_respond('Say turn on the fan or switch the light off.', true);
 }
 
 if (in_array($intentName, ['AMAZON.CancelIntent', 'AMAZON.StopIntent'], true)) {

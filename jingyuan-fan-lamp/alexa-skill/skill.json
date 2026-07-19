@@ -17,8 +17,9 @@
           "summary": "Control hall fan and light via BLE bridge",
           "description": "Custom skill for hall fan and chandelier light. Requires Mac BLE bridge polling the command queue.",
           "examplePhrases": [
-            "Alexa, ask living room to turn on the fan",
-            "Alexa, ask living room to turn off the light"
+            "Alexa, ask center lamp to turn on the fan",
+            "Alexa, ask center lamp to turn on the light",
+            "Alexa, ask center lamp to switch the light off"
           ],
           "keywords": []
         },
@@ -27,8 +28,9 @@
           "summary": "Control hall fan and light via BLE bridge",
           "description": "Custom skill for hall fan and chandelier light. Requires Mac BLE bridge polling the command queue.",
           "examplePhrases": [
-            "Alexa, ask living room to turn on the fan",
-            "Alexa, ask living room to turn off the light"
+            "Alexa, ask center lamp to turn on the fan",
+            "Alexa, ask center lamp to turn on the light",
+            "Alexa, ask center lamp to switch the light off"
           ],
           "keywords": []
         }

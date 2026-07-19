@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "living room",
+      "invocationName": "center lamp",
       "intents": [
         {
           "name": "TurnOnFan",
@@ -16,11 +16,10 @@
         {
           "name": "TurnOffFan",
           "samples": [
-            "turn off the fan",
-            "turn the fan off",
             "switch the fan off",
             "shut off the fan",
-            "fans off"
+            "fans off",
+            "switch off the fan"
           ]
         },
         {
@@ -28,16 +27,16 @@
           "samples": [
             "turn on the light",
             "turn the light on",
-            "light on",
-            "switch on the light"
+            "switch on the light",
+            "lights on"
           ]
         },
         {
           "name": "TurnOffLight",
           "samples": [
-            "turn off the light",
-            "turn the light off",
-            "light off",
+            "switch the light off",
+            "shut off the light",
+            "lights off",
             "switch off the light"
           ]
         },
