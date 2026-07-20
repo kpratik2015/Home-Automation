@@ -10,8 +10,10 @@ The upstream `Sources/WhatCablePlugins/` tree is an empty stub in the public rep
 
 - `--power-monitor` - live power telemetry in the terminal
 - `--power-monitor-json` - same data as newline-delimited JSON
+- `--cable-score` - per-port scorecard (checklist, gaps, Amazon.in suggestions)
+- `--cable-score-json` - same scorecard as JSON
 
-Implementation uses the upstream MIT modules `WhatCableCore` and `WhatCableDarwinBackend` (`PowerTelemetryWatcher`, `PowerMonitorSnapshot`). We did not copy or reverse-engineer WhatCable Pro.
+Implementation uses the upstream MIT modules `WhatCableCore` and `WhatCableDarwinBackend`. We did not copy or reverse-engineer WhatCable Pro. Amazon.in recommendations are a hand-curated catalog in the plugin, not scraped from the web.
 
 ## Upstream license
 
@@ -27,7 +29,7 @@ Requires macOS 14+, Apple Silicon, Swift 5.9+ (Xcode 15+). Command reference: [U
 cd whatcable
 swift build
 swift run whatcable-cli --power-monitor
-swift run whatcable-cli --power-monitor-json
+swift run whatcable-cli --cable-score
 ```
 
 ## Support upstream

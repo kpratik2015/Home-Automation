@@ -30,7 +30,9 @@ let package = Package(
         .target(
             name: "WhatCablePlugins",
             dependencies: ["WhatCableCore", "WhatCableDarwinBackend", "WhatCableAppKit"],
-            path: "Sources/WhatCablePlugins"
+            path: "Sources/WhatCablePlugins",
+            exclude: ["LICENSE"],
+            resources: [.process("Resources")]
         ),
         .executableTarget(
             name: "WhatCable",

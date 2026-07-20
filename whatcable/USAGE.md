@@ -60,6 +60,30 @@ On battery, the top line switches to **Battery discharge** using pack voltage/cu
 
 ---
 
+## Fork plugin: cable scorecard
+
+| Command | Description |
+|---------|-------------|
+| `--cable-score` | Per occupied port: score, checklist, gaps, Amazon.in suggestions |
+| `--cable-score-json` | Same as JSON |
+
+```bash
+swift run whatcable-cli --cable-score
+swift run whatcable-cli --cable-score-json | jq '.ports[] | {portName, score, fitLine}'
+```
+
+Each port card includes:
+
+- **Score 0–100** and a plain **fit line** (e.g. OK for phone charge)
+- **What it is now** - role, charger, e-marker, trust, partner
+- **Capabilities checklist** - ✓ / ✗ / ? with reasons
+- **What's missing / next test** - how to reveal more (high-watt / TB)
+- **Better cables (Amazon.in)** - curated India search links by job
+
+E-marker unread at ≤3A is normal - score stays mid and checklist marks identity as `?`, with a retest hint.
+
+---
+
 ## Cable snapshot (upstream free CLI)
 
 One-shot port/cable summary:
@@ -114,7 +138,7 @@ swift run WhatCable                  # dev menu bar build (swift run, not CLI)
 
 ## Not in this fork
 
-Official **WhatCable Pro** adds `--monitor`, `--dashboard`, negotiation/display diagnostics UI, cable history, and more. This fork only adds `--power-monitor` / `--power-monitor-json`. See [whatcable.uk/pro](https://whatcable.uk/pro).
+Official **WhatCable Pro** adds `--monitor`, `--dashboard`, negotiation/display diagnostics UI, cable history, and more. This fork adds `--power-monitor` / `--power-monitor-json` and `--cable-score` / `--cable-score-json`. See [whatcable.uk/pro](https://whatcable.uk/pro).
 
 ---
 

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "anker-usb-c-60w",
+    "jobs": ["phone_charge"],
+    "title": "Anker USB-C to USB-C cable (60W class)",
+    "why": "Reliable PD for iPhone and everyday laptop top-up on Amazon.in.",
+    "amazonInSearch": "Anker USB C to USB C cable 60W",
+    "amazonInUrl": "https://www.amazon.in/s?k=Anker+USB+C+to+USB+C+cable+60W",
+    "targetClass": { "minWatts": 27, "minSpeedHint": "USB 2 / PD" }
+  },
+  {
+    "id": "apple-usb-c-1m",
+    "jobs": ["phone_charge", "mac_100w"],
+    "title": "Apple USB-C Charge Cable (1 m)",
+    "why": "Apple-branded option when you want a known-safe charge cable for phone or Mac.",
+    "amazonInSearch": "Apple USB-C Charge Cable 1m",
+    "amazonInUrl": "https://www.amazon.in/s?k=Apple+USB-C+Charge+Cable+1m",
+    "targetClass": { "minWatts": 60, "minSpeedHint": "USB 2 / PD" }
+  },
+  {
+    "id": "anker-usb-c-100w",
+    "jobs": ["mac_100w"],
+    "title": "Anker USB-C to USB-C 100W cable",
+    "why": "Common 100W PD cable for MacBook-class charging on Amazon.in.",
+    "amazonInSearch": "Anker USB C to USB C 100W cable",
+    "amazonInUrl": "https://www.amazon.in/s?k=Anker+USB+C+to+USB+C+100W+cable",
+    "targetClass": { "minWatts": 100, "minSpeedHint": "USB 3 / PD" }
+  },
+  {
+    "id": "ugreen-100w-2m",
+    "jobs": ["mac_100w"],
+    "title": "UGREEN USB-C 100W cable (2 m)",
+    "why": "Widely sold 100W option with e-marker on many SKUs; check listing wattage.",
+    "amazonInSearch": "UGREEN USB C 100W cable 2m",
+    "amazonInUrl": "https://www.amazon.in/s?k=UGREEN+USB+C+100W+cable+2m",
+    "targetClass": { "minWatts": 100, "minSpeedHint": "USB 3 / PD" }
+  },
+  {
+    "id": "anker-240w",
+    "jobs": ["mac_240w"],
+    "title": "Anker USB-C cable 240W / 140W class",
+    "why": "For high-watt Mac bricks; confirm 5A / EPR on the product page.",
+    "amazonInSearch": "Anker USB C 240W cable 5A",
+    "amazonInUrl": "https://www.amazon.in/s?k=Anker+USB+C+240W+cable+5A",
+    "targetClass": { "minWatts": 140, "minSpeedHint": "USB4 / PD" }
+  },
+  {
+    "id": "ugreen-tb4-40gbps",
+    "jobs": ["thunderbolt"],
+    "title": "UGREEN Thunderbolt 4 / USB4 40Gbps cable",
+    "why": "For docks and fast SSDs; verify Thunderbolt 4 logo on the listing.",
+    "amazonInSearch": "UGREEN Thunderbolt 4 cable 40Gbps",
+    "amazonInUrl": "https://www.amazon.in/s?k=UGREEN+Thunderbolt+4+cable+40Gbps",
+    "targetClass": { "minWatts": 100, "minSpeedHint": "USB4 40 Gbps" }
+  },
+  {
+    "id": "caldigit-tb4",
+    "jobs": ["thunderbolt"],
+    "title": "CalDigit Thunderbolt 4 cable",
+    "why": "Premium TB4 option often used with docks; check length and wattage.",
+    "amazonInSearch": "CalDigit Thunderbolt 4 cable",
+    "amazonInUrl": "https://www.amazon.in/s?k=CalDigit+Thunderbolt+4+cable",
+    "targetClass": { "minWatts": 100, "minSpeedHint": "USB4 40 Gbps" }
+  },
+  {
+    "id": "belkin-usb-c-100w",
+    "jobs": ["mac_100w", "phone_charge"],
+    "title": "Belkin USB-C to USB-C 100W cable",
+    "why": "Retail-brand alternative available on Amazon.in.",
+    "amazonInSearch": "Belkin USB C 100W cable",
+    "amazonInUrl": "https://www.amazon.in/s?k=Belkin+USB+C+100W+cable",
+    "targetClass": { "minWatts": 100, "minSpeedHint": "USB 3 / PD" }
+  }
+]
