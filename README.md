@@ -2,11 +2,14 @@
 
 Personal home automations. Each automation lives in its own folder.
 
+**Licensing:** Original work here is proprietary ([LICENSE](LICENSE)). Not licensed for use without permission. The [whatcable](whatcable/) fork is separate: upstream [LICENSE](whatcable/LICENSE) (WhatCable) plus [PLUGIN_LICENSE](whatcable/PLUGIN_LICENSE) for our plugin. See [whatcable/FORK.md](whatcable/FORK.md) and [whatcable/USAGE.md](whatcable/USAGE.md).
+
 ## Automations
 
 | Folder | Description |
 |--------|-------------|
 | [wiz-night-guard](wiz-night-guard/) | WiZ bulb watchdog: arm after off, force off on power blips overnight |
+| [whatcable](whatcable/) | Fork of [WhatCable](https://github.com/darrylmorley/whatcable) with a live power-monitor CLI plugin (not official WhatCable / not Pro) |
 
 ## Add a new automation
 

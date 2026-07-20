@@ -1,0 +1,124 @@
+---
+permalink: /privacy.html
+layout: page.njk
+title: "Privacy Policy"
+subtitle: "Last updated: 2026-06-02"
+description: "Privacy policy for WhatCable, the macOS menu bar app for USB-C cable diagnostics."
+twitterCard: summary
+---
+<p>
+  WhatCable is a small macOS menu bar app that tells you what each USB-C
+  cable plugged into your Mac can actually do. This page explains what
+  data the app handles.
+</p>
+
+<h2>What WhatCable reads</h2>
+<p>
+  WhatCable reads USB-C port state, USB-PD Discover Identity messages,
+  power source data, and Thunderbolt switch information from your Mac
+  through Apple's IOKit framework. All of this stays on your Mac. It is
+  used only to render the popover you see in the menu bar.
+</p>
+
+<h2>What WhatCable sends</h2>
+<p>
+  WhatCable checks the public
+  GitHub Releases API once every six hours to see if a newer version is
+  available. That request includes a <code>User-Agent</code> header
+  naming the app and your installed version (for example,
+  <code>WhatCable/0.8.4</code>). It does not include any personal
+  information, and no analytics, telemetry, or identifiers are sent.
+</p>
+<p>
+  If you click "Report this cable", WhatCable opens GitHub in your
+  default browser with the cable's public e-marker fields pre-filled in
+  a new issue. You review the contents and decide whether to submit it.
+  Nothing is sent automatically.
+</p>
+
+<h2>Contributing diagnostic data (opt-in)</h2>
+<p>
+  WhatCable has an optional "Contribute Diagnostic Data" feature, in
+  Settings and the right-click menu. It is off by default and never runs
+  on its own. When you choose to run it, a consent screen explains what
+  will be sent before anything leaves your Mac.
+</p>
+<p>
+  If you proceed, WhatCable runs a set of read-only IOKit probes and sends
+  the results to a WhatCable server to help improve cable, port, and
+  display detection. The submission contains:
+</p>
+<ul>
+  <li>Raw IOKit registry properties for your USB-C and Thunderbolt ports,
+    power delivery state, Thunderbolt topology, and any connected
+    accessories.</li>
+  <li>The model and capabilities of any connected display, read from its
+    EDID.</li>
+  <li>Your macOS version and Mac chip type.</li>
+  <li>A one-way SHA-256 hash of your Mac's hardware UUID, used only to
+    group submissions from the same machine. The original UUID is never
+    sent and cannot be recovered from the hash.</li>
+</ul>
+<p>
+  No names, accounts, your Mac's serial number, or personal data are included.
+  It is the same kind of data visible in System Information. Decline at
+  the consent screen and nothing is sent.
+</p>
+
+<h2>WhatCable Pro (purchase and licensing)</h2>
+<p>
+  WhatCable Pro is an optional paid upgrade. Buying it and keeping it
+  activated involves some personal data that the free app never touches.
+</p>
+<ul>
+  <li><strong>Purchase.</strong> Payment is handled by Stripe. Your card
+    details and email address are processed by Stripe under
+    <a href="https://stripe.com/privacy">Stripe's privacy policy</a>.
+    WhatCable never sees or stores your card details.</li>
+  <li><strong>Licence delivery.</strong> Your licence key is emailed to the
+    address you bought it with.</li>
+  <li><strong>Activation and validation.</strong> When you activate a key,
+    and once each time the app launches afterwards, WhatCable sends your
+    licence key and your Mac's hardware UUID to WhatCable's licensing server
+    to confirm the licence and enforce the two-Mac limit. If the server
+    can't be reached, Pro keeps working offline for up to 30 days.</li>
+  <li><strong>What the licence server stores.</strong> Your licence key,
+    the email you bought it with, and the hardware UUID of each Mac the key
+    has been activated on (up to two), so one key can't be used on more
+    machines than allowed.</li>
+  <li><strong>Support.</strong> If you use the support form on the website,
+    it collects the email address and the licence key or Stripe transaction
+    ID you enter, so we can find your purchase and reply.</li>
+</ul>
+<p>
+  Deactivating a licence (in the app, or with
+  <code>whatcable --deactivate</code>) removes the stored key from that Mac.
+  The free app makes none of these calls.
+</p>
+
+<h2>What WhatCable stores</h2>
+<p>
+  WhatCable stores your in-app preferences (display mode, hidden ports,
+  notification toggles, font size) in the standard macOS user defaults
+  system, on your Mac. With WhatCable Pro, your licence key is also stored
+  on your Mac so it doesn't have to be re-entered.
+</p>
+
+<h2>What WhatCable does not do</h2>
+<p>
+  Outside the opt-in diagnostic feature and the Pro purchase and licensing
+  described above, WhatCable does not collect, store, or transmit:
+</p>
+<ul>
+  <li>Personal information (name, email, address, phone number).</li>
+  <li>Account or device identifiers.</li>
+  <li>Browsing or app usage analytics.</li>
+  <li>Information about other apps or files on your Mac.</li>
+  <li>Anything about devices connected to ports WhatCable does not need to read.</li>
+</ul>
+
+<h2>Contact</h2>
+<p>
+  Bug reports and questions go through the public GitHub repository at
+  <a href="https://github.com/darrylmorley/whatcable">github.com/darrylmorley/whatcable</a>.
+</p>

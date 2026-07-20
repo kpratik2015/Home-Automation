@@ -1,0 +1,27 @@
+# gitleaks configuration for WhatCable.
+#
+# Extends gitleaks' built-in ruleset (so all the real secret detection stays on)
+# and adds one narrow allowlist: UUID-shaped strings inside unit-test files.
+#
+# Why this is needed: the port-identity tests use fake HPM controller UUIDs as
+# fixtures (e.g. the normalised 32-hex join key "17bd562dd913..."). gitleaks'
+# generic-api-key rule treats those high-entropy hex strings as possible API
+# keys. They are test data, not secrets. The allowlist below only suppresses
+# UUID-format values AND only in Tests/*.swift (matchCondition = "AND"), so a
+# real key elsewhere, or a non-UUID secret in a test file, is still caught.
+
+title = "WhatCable gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Fake UUID fixtures in unit tests (HPM controller UUIDs, dashed or normalised) are not secrets"
+matchCondition = "AND"
+paths = ['''Tests/.*\.swift''']
+regexes = [
+  # Dashed UUID, e.g. 17BD562D-D913-3441-0CD9-435CAC6CFA51
+  '''[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}''',
+  # Normalised join key, 32 hex chars with no dashes
+  '''\b[0-9a-fA-F]{32}\b''',
+]

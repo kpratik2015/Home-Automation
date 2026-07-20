@@ -6,3 +6,5 @@ __pycache__/
 **/fan-queue/data/
 *.log
 state.json
+whatcable/.build/
+whatcable/.swiftpm/

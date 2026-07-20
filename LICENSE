@@ -1,0 +1,9 @@
+Copyright (c) 2026 Pratik Kataria. All rights reserved.
+
+No permission is granted to use, copy, modify, merge, publish, distribute,
+sublicense, or sell any part of this repository without prior written
+permission from the copyright holder.
+
+Exceptions: subdirectories that include their own LICENSE file are governed
+by those terms instead of this notice. In particular, the whatcable/ tree
+contains upstream and plugin licenses described in whatcable/FORK.md.

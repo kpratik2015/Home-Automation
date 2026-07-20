@@ -1,0 +1,82 @@
+.build/
+.swiftpm/
+DerivedData/
+build/
+dist/
+dist-mas/
+*.xcodeproj
+.DS_Store
+.env
+# Ignore .claude/ contents individually (not the directory itself) so the
+# negation below can work: git never re-includes files under an excluded
+# DIRECTORY, so the previous `.claude/` form made any negation dead.
+.claude/*
+# except the shared project settings: harness-enforced approval prompts
+# (owner guardrail, 2026-07-14). Everything else in .claude/ stays local.
+!.claude/settings.json
+
+# App Store provisioning profile and any other local-only signing material.
+secrets/
+
+# Local scratch docs (kept uncommitted by convention)
+# planning/ is tracked here; .public-exclude keeps it out of the mirror.
+technical-docs/
+BUILDING.md
+
+# Release notes are staged here, then copied into the homebrew-whatcable tap
+# repo and used as the GitHub release body. The tap repo is the canonical home.
+release-notes/
+
+# USB-IF spec PDFs (copyrighted, not for distribution)
+reference/
+screenshots-pro/
+
+# IOKit investigation probes (compiled binaries and scratch output).
+# probes/test-kit/ contains the C sources bundled in the app and is tracked.
+probes/*
+!probes/test-kit/
+
+# Eleventy site tooling
+node_modules/
+
+# Local author crib sheet for the blog (gitignored by convention)
+BLOG.md
+
+# Decap CMS fallback media folder. The /admin uploader sends images to R2 via
+# the custom media library, but Decap still requires media_folder set. This
+# folder should never receive real files; ignore it just in case.
+src/blog/uploads/
+AGENTS.md
+
+# Wrangler / Miniflare local state (geolocates the developer)
+.wrangler/
+
+# Internal architectural decision log
+DECISIONS.md
+
+# Customer test-kit probe raw dumps. The bulk probes are a redundant copy of
+# the WHATCABLE_PROBE_DATA KV store (re-fetchable by machine_hash:probe key),
+# so they are not tracked. EXCEPTION: 01_walk_pd_tree.json is kept tracked for
+# every folder, because DataLinkDiagnosticProbeSweepTests reads it as a test
+# fixture (and it is the gate input + cable fingerprint source). The other 12
+# probes are tracked only for CIO folders (kept on disk for /whatcable-mine-cio).
+# Distilled artifacts (inspection.md + the top-level rollups) are always tracked.
+research/customer-probes/*/*.json
+!research/customer-probes/*/01_walk_pd_tree.json
+# Load-bearing fixture for Probe38TreeWalkTests (the USB device-tree replay
+# test). Like probe 01, this one probe-38 file is tracked so the test has a
+# guaranteed fixture in CI; every other probe 38 stays gitignored.
+!research/customer-probes/m3pro_macos26.5.1_h/38_usb_device_tree.json
+# Named-machine fixtures for USBWatcherCorpusSweepTests (ancestor-walk replay
+# through USBWatcher.classifyAncestry): the two Mac Studios pinning the issue
+# #417 embedded-controller misclassification, the M1 mini (same class, FL1100),
+# a real-dock desktop, and the M4 mini on macOS 27 (Tahoe board port node).
+!research/customer-probes/m2max_macos26.5.2/38_usb_device_tree.json
+!research/customer-probes/m4max_macos26.5.1_f/38_usb_device_tree.json
+!research/customer-probes/m1_macos15.7.7_c/38_usb_device_tree.json
+!research/customer-probes/m4pro_macos15.7.7_d/38_usb_device_tree.json
+!research/customer-probes/m4_macos27.0_e/38_usb_device_tree.json
+
+# Python bytecode (from research/build scripts like inspect-probe.py)
+__pycache__/
+*.pyc

@@ -2,6 +2,8 @@
 
 Replay `com.jingyuan.fan-lamp` BLE advertisement bursts. Mac bridge polls a HTTPS command queue on pratikkataria.com; Alexa custom skill enqueues commands.
 
+Copyright (c) 2026 Pratik Kataria. All rights reserved. See [LICENSE](LICENSE).
+
 ## CLI
 
 ```bash

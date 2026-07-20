@@ -2,6 +2,8 @@
 
 Forces a WiZ bulb off during overnight power blips after you have turned it off for the night.
 
+Copyright (c) 2026 Pratik Kataria. All rights reserved. See [LICENSE](LICENSE).
+
 ## How it works
 
 1. Runs daily from `NIGHT_START` to `NIGHT_END` (default 1:00 AM - 10:00 AM)
