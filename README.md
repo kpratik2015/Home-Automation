@@ -2,7 +2,13 @@
 
 Personal home automations. Each automation lives in its own folder.
 
-**Licensing:** Original work here is proprietary ([LICENSE](LICENSE)). Not licensed for use without permission. The [whatcable](whatcable/) fork is separate: upstream [LICENSE](whatcable/LICENSE) (WhatCable) plus [PLUGIN_LICENSE](whatcable/PLUGIN_LICENSE) for our plugin. See [whatcable/FORK.md](whatcable/FORK.md) and [whatcable/USAGE.md](whatcable/USAGE.md).
+[![License: Proprietary](https://img.shields.io/badge/license-proprietary-red)](LICENSE)
+
+## Licensing
+
+This repository is **proprietary**. Viewing on GitHub does not grant permission to use, copy, modify, or redistribute any part of it. See [LICENSE](LICENSE).
+
+Open-source terms apply only inside [whatcable/](whatcable/): upstream WhatCable under [whatcable/LICENSE](whatcable/LICENSE) (MIT) and the fork plugin under [whatcable/Sources/WhatCablePlugins/LICENSE](whatcable/Sources/WhatCablePlugins/LICENSE) (MIT). Details: [whatcable/FORK.md](whatcable/FORK.md), [whatcable/USAGE.md](whatcable/USAGE.md).
 
 ## Automations
 

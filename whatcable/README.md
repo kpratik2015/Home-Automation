@@ -1,6 +1,6 @@
 # WhatCable
 
-> **Fork notice:** This copy lives in [Home-Automation](..) and adds a `--power-monitor` CLI plugin. It is **not** the official app or WhatCable Pro. See [FORK.md](FORK.md) and [USAGE.md](USAGE.md).
+> **Fork notice:** This copy lives in the proprietary [Home-Automation](../) monorepo and adds a `--power-monitor` CLI plugin. It is **not** the official app or WhatCable Pro. Licensing: upstream MIT in [LICENSE](LICENSE); fork plugin MIT in [Sources/WhatCablePlugins/LICENSE](Sources/WhatCablePlugins/LICENSE). See [FORK.md](FORK.md) and [USAGE.md](USAGE.md).
 
 > **What can this USB-C cable actually do?**
 
@@ -14,7 +14,8 @@ USB-C hides a lot under one connector. Anything from a USB 2.0 charge-only cable
 
 [![Latest release](https://img.shields.io/github/v/release/darrylmorley/whatcable)](https://github.com/darrylmorley/whatcable/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-blue)](https://github.com/darrylmorley/whatcable)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Upstream license: MIT](https://img.shields.io/badge/upstream-MIT-green)](LICENSE)
+[![Fork plugin: MIT](https://img.shields.io/badge/fork%20plugin-MIT-green)](Sources/WhatCablePlugins/LICENSE)
 [![WhatCable Pro](https://img.shields.io/badge/WhatCable%20Pro-%C2%A39.99-orange)](https://whatcable.uk/pro)
 
 ![WhatCable popover](docs/screenshot.webp)

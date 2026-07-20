@@ -17,7 +17,7 @@ Implementation uses the upstream MIT modules `WhatCableCore` and `WhatCableDarwi
 
 Most of this tree remains under the upstream MIT license. See [LICENSE](LICENSE) (WhatCable copyright retained).
 
-Plugin files under `Sources/WhatCablePlugins/` are under [PLUGIN_LICENSE](PLUGIN_LICENSE).
+Plugin files under `Sources/WhatCablePlugins/` are MIT-licensed. See [Sources/WhatCablePlugins/LICENSE](Sources/WhatCablePlugins/LICENSE) (same text as [PLUGIN_LICENSE](PLUGIN_LICENSE)).
 
 ## Build
 
