@@ -25,3 +25,10 @@
 
 // 1 = accept fan/light commands on serial monitor.
 #define FAN_BLE_SERIAL_ENABLED 1
+
+// Alexa queue poller (Phase 3).
+#define QUEUE_ENABLED 1
+#define QUEUE_BASE_URL "https://pratikkataria.com/home-automation/fan-queue"
+#define QUEUE_DEQUEUE_TOKEN "change-me-dequeue-token"
+#define QUEUE_POLL_SECONDS 3
+#define QUEUE_DEBOUNCE_MS 1500

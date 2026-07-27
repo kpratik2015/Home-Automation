@@ -7,9 +7,10 @@ Firmware for [Seeed XIAO ESP32-C6](https://wiki.seeedstudio.com/xiao_esp32c6_get
 24/7 on one chip:
 
 - **WiZ night guard** - arms after off, force-off during night window (1:00-10:00 by default)
-- **Fan/lamp BLE** - serial commands `fan-on`, `fan-off`, `light-on`, `light-off`
+- **Fan/lamp BLE** - serial commands or Alexa queue
+- **Alexa queue poller** - polls `pratikkataria.com` every 3s, runs BLE burst, acks job
 
-Stop Mac `com.wiz.nightguard` when ESP owns the bulb. Mac fan bridge can stay for Alexa until Phase 3.
+No Mac required. Set `QUEUE_DEQUEUE_TOKEN` in `include/config.h` (same token as hosting `config.local.php`).
 
 ```bash
 pio run -e home -t upload
@@ -18,7 +19,9 @@ pio device monitor
 
 See [commands.md](commands.md) for test envs, Mac isolation, debugging.
 
-## Phase 3 (later): Alexa queue poller on ESP
+## Phase 3: Alexa queue on ESP (done)
+
+ESP polls `QUEUE_BASE_URL` with `QUEUE_DEQUEUE_TOKEN`. Mac bridge not needed.
 
 ## Hardware
 

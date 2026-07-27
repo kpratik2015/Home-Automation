@@ -1,6 +1,6 @@
 # Jingyuan fan/lamp BLE
 
-Replay `com.jingyuan.fan-lamp` BLE advertisement bursts. Mac bridge polls a HTTPS command queue on pratikkataria.com; Alexa custom skill enqueues commands.
+Replay `com.jingyuan.fan-lamp` BLE advertisement bursts. ESP32 (or Mac bridge) polls a HTTPS command queue on pratikkataria.com; Alexa Smart Home skill enqueues commands.
 
 Copyright (c) 2026 Pratik Kataria. All rights reserved. See [LICENSE](LICENSE).
 
@@ -60,17 +60,17 @@ sequenceDiagram
   participant Echo as EchoDot
   participant Alexa as AlexaCloud
   participant Host as pratikkataria.com
-  participant Mac as MacBridge
+  participant ESP as ESP32
   participant Fan as Chandelier
 
-  Echo->>Alexa: ask center lamp to turn on the fan
-  Alexa->>Host: POST skill.php
+  Echo->>Alexa: turn on center fan
+  Alexa->>Host: POST smarthome.php
   Host->>Host: enqueue fan-on
   loop every 2s
-    Mac->>Host: GET dequeue.php
-    Host-->>Mac: job
-    Mac->>Fan: BLE burst
-    Mac->>Host: POST ack.php
+    ESP->>Host: GET dequeue.php
+    Host-->>ESP: job
+    ESP->>Fan: BLE burst
+    ESP->>Host: POST ack.php
   end
 ```
 
@@ -79,13 +79,10 @@ sequenceDiagram
 
 ## Alexa
 
-Custom skill invocation **`center lamp`** (not Smart Home):
+Smart Home devices **Center Fan** and **Center Light**:
 
-- *"Alexa, ask center lamp to turn on the fan"*
-- *"Alexa, ask center lamp to turn on the light"*
-- *"Alexa, ask center lamp to switch the light off"*
-
-Light off: use **switch the light off** (not "turn off the light" - hits StopIntent).
+- *"Alexa, turn on center fan"*
+- *"Alexa, turn off center light"*
 
 Setup: [`alexa-skill/README.md`](alexa-skill/README.md)
 
@@ -132,6 +129,6 @@ Linux: `pip install -r requirements-linux.txt` then `sudo python3 fan_ble.py fan
 | `bridge_server.py` | Webhook + queue poller daemon |
 | `queue_poller.py` | Hosting queue poll/ack loop |
 | `hosting/fan-queue/` | PHP queue API on pratikkataria.com |
-| `alexa-skill/` | Interaction model + setup docs |
+| `alexa-skill/` | Smart Home manifest + setup docs |
 | `fan_ble.py` | CLI |
 | `install.sh` | LaunchAgent setup |

@@ -1,70 +1,69 @@
-# Alexa skill setup (Hall Fan Light)
+# Alexa Smart Home setup (Center Fan / Center Light)
 
-Personal custom skill - no AWS Lambda. HTTPS endpoint is PHP on your hosting.
+Natural voice: *"Alexa, turn on center fan"*
 
-## 1. Create the skill
+## 1. Deploy hosting
 
-1. Open [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
-2. **Create Skill** → Custom → Provision your own → Host skill in Alexa-hosted (No) → Create skill manually
-3. **Invocation name:** `center lamp` (must match [`interaction-model.json`](interaction-model.json); Alexa requires 2+ words)
+```bash
+cd jingyuan-fan-lamp
+./scripts/deploy-fan-queue.sh
+./scripts/setup-oauth-config.sh
+```
 
-## 2. Interaction model
+Save the printed **Client ID** and **Client Secret** for step 3.
 
-1. **Build** → **Interaction Model** → JSON Editor
-2. Paste contents of [`interaction-model.json`](interaction-model.json)
-3. Save and build
+## 2. Lambda (eu-west-1)
 
-## 3. Endpoint
+See [`lambda/README.md`](lambda/README.md). Lambda test with Discover event must return Center Fan / Center Light.
 
-1. **Build** → **Endpoint**
-2. **HTTPS** → `https://pratikkataria.com/home-automation/fan-queue/skill.php`
-3. Certificate: **My development endpoint is a sub-domain of a domain that has a wildcard certificate...**
-4. Save
+## 3. Alexa Developer Console
 
-## 4. Test
+### Smart Home endpoint
 
-1. **Test** tab → enable testing for **Development**
-2. Type or say: *turn on the fan*
-3. Expect speech: "Turning the fan on." and a queued job on hosting
+**Build → Smart Home**:
 
-## 5. Enable on your Echo
+- Payload **v3**
+- Default endpoint: Lambda ARN (Ireland, no `:1`)
+- **Europe, India**: same ARN
+- Save
 
-Alexa app → **More** → **Skills & Games** → **Your Skills** → **Dev** → enable **Hall Fan Light**
+### Account linking (required)
 
-## Voice phrases
+**Build → Account linking**:
 
-Custom skill only works with **ask/tell + center lamp** (not "turn on the light"):
+| Field | Value |
+|-------|--------|
+| Authorization URI | `https://pratikkataria.com/home-automation/fan-queue/oauth/authorize.php` |
+| Access Token URI | `https://pratikkataria.com/home-automation/fan-queue/oauth/token.php` |
+| Client ID | from `setup-oauth-config.sh` output |
+| Client Secret | from `setup-oauth-config.sh` output |
+| Authentication Scheme | Credentials in request body |
+| Access Token Scheme | Bearer |
+| Scope | (empty) |
+| Domain list | `pratikkataria.com` |
 
-- *"Alexa, ask center lamp to turn on the fan"*
-- *"Alexa, ask center lamp to turn off the fan"*
-- *"Alexa, ask center lamp to turn on the light"*
-- *"Alexa, ask center lamp to switch the light off"*
+Save.
 
-For **off** commands avoid *turn off* - Alexa may match StopIntent instead.
+## 4. Enable + link in Alexa app
 
-Natural *"Alexa, turn on the fan"* needs a Smart Home skill (out of scope).
+1. **Skills & Games** → **Your Skills** → **Dev** → **Center Fan Light** → **Enable**
+2. Tap **Link account** → **Link account** on web page
+3. Wait for discover, or say *"Alexa, discover devices"*
+4. Expect **Center Fan** and **Center Light**
 
-## en-IN
+## 5. ESP32
 
-Add **English (India)** under skill Languages and rebuild the model for each locale you use.
+Flash `esp32-home` `home` env with queue config. Serial shows `Queue:` on Alexa commands.
 
 ## Troubleshooting
 
-### "A few things share the name light/fan"
-
-Alexa is **not** using your skill - it is searching Smart Home devices.
-
-1. Enable dev skill: Alexa app → Skills → **Your Skills** → **Dev** → enable skill
-2. Same Amazon account as Developer Console
-3. Say full phrase: *"Alexa, ask center lamp to turn on the fan"*
-4. For light off: *"ask center lamp to **switch the light off**"* (not "turn off the light")
-5. Test on **Echo Dot** if phone app keeps failing (app is pickier)
-
-### Other issues
-
 | Issue | Check |
 |-------|--------|
-| Skill returns error | `curl https://pratikkataria.com/home-automation/fan-queue/health.php` |
-| Signature verify fails | Hosting can reach `s3.amazonaws.com`; check PHP `openssl` |
-| Fan does not move | Mac bridge running with `QUEUE_ENABLED = True`; check `bridge.log` |
-| Job stuck | Lease expires after 30s; Mac acks `failed` on BLE errors |
+| Can't find devices on enable | Account linking saved; re-run `setup-oauth-config.sh` if secrets mismatch |
+| Link page error | `./scripts/deploy-fan-queue.sh` deployed `oauth/` |
+| Lambda OK, app fails | `smarthome.log` on server during discover |
+| Fan doesn't move | ESP queue poller |
+
+## Legacy
+
+Custom skill `center lamp` is deprecated.

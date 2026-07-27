@@ -200,8 +200,11 @@ function alexa_verify_signature(string $rawBody, string $signatureBase64, string
 
 function alexa_verify_timestamp(array $payload): void
 {
-    $timestamp = $payload['request']['timestamp'] ?? '';
+    $timestamp = $payload['request']['timestamp'] ?? $payload['directive']['header']['timestamp'] ?? '';
     if ($timestamp === '') {
+        if (isset($payload['directive'])) {
+            return;
+        }
         fan_queue_json(400, ['error' => 'missing request timestamp']);
     }
 

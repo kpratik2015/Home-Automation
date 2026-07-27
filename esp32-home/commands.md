@@ -195,9 +195,26 @@ Uses `default.csv` partition and excludes `fan_ble.cpp`.
 5. Type `fan-off`, then `light-on`, `light-off`
 6. `./scripts/resume-mac.sh` when done
 
-### Phase 3 (later): Alexa queue on ESP32
+### Alexa did not work
 
-Stop Mac bridge entirely. ESP becomes the only queue consumer.
+Smart Home - no invocation name. Use device names:
+
+- *"Alexa, turn on center fan"*
+- *"Alexa, turn off center light"*
+
+**Setup checklist:**
+
+1. `./scripts/deploy-fan-queue.sh` (deploys `smarthome.php`)
+2. [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask) → **Smart Home** skill → endpoint `https://pratikkataria.com/home-automation/fan-queue/smarthome.php`
+3. Alexa app → **Devices** → discover devices → **Center Fan**, **Center Light**
+4. Disable old custom skill **Hall Fan Light** if enabled
+5. ESP32 running `home` env with `QUEUE_*` in `config.h` (serial should show `Queue:` dequeue lines)
+
+See `jingyuan-fan-lamp/alexa-skill/README.md` for full steps.
+
+### Queue: invalid HTTP response
+
+Reflash latest `home` firmware (uses HTTPClient + HTTP/1.1 ALPN). Empty queue is silent - no error every 3s when working.
 
 ---
 
@@ -316,7 +333,7 @@ If no error but fan still ignores:
 | Path | Uses pratikkataria.com? |
 |------|-------------------------|
 | ESP32 `fan-on` serial | **No** - direct BLE only |
-| Alexa | **Yes** - skill → queue → Mac → BLE |
+| Alexa | **Yes** - Smart Home → queue → ESP32 → BLE |
 
 Hosting health (Alexa path only):
 
@@ -325,7 +342,7 @@ curl -s https://pratikkataria.com/home-automation/fan-queue/health.php
 # expect: {"ok":true}
 ```
 
-If health is OK but Alexa fails: skill enabled (Dev), en-IN model, Mac bridge running, phrasing (*"Alexa, ask center lamp to turn on the fan"*).
+If health is OK but Alexa fails: Smart Home skill endpoint saved, devices discovered, ESP queue poller running.
 
 ---
 

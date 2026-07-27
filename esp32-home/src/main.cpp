@@ -22,10 +22,18 @@
 #define FAN_BLE_SERIAL_ENABLED 1
 #endif
 
+#ifndef QUEUE_ENABLED
+#define QUEUE_ENABLED 0
+#endif
+
 #include "fan_ble.h"
 
 #if WIZ_GUARD_ENABLED
 #include "wiz_guard.h"
+#endif
+
+#if QUEUE_ENABLED && !WIFI_DISABLED
+#include "queue_poller.h"
 #endif
 
 // Combined build: defer BLE RAM so WiFi PHY can init first.
@@ -50,6 +58,7 @@ void connectWifi() {
   }
 
   WiFi.mode(WIFI_STA);
+  delay(200);
   Serial.printf("WiFi connecting to %s", WIFI_SSID);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -118,6 +127,11 @@ void printStatus() {
 #else
   Serial.println("WiZ guard: disabled");
 #endif
+#if QUEUE_ENABLED && !WIFI_DISABLED
+  Serial.printf("Alexa queue: enabled (%us poll)\n", static_cast<unsigned>(QUEUE_POLL_SECONDS));
+#else
+  Serial.println("Alexa queue: disabled");
+#endif
   Serial.println("--------------");
 }
 
@@ -170,6 +184,9 @@ void delayWithSerialPoll(unsigned long durationMs) {
   const unsigned long endMs = millis() + durationMs;
   while (static_cast<long>(endMs - millis()) > 0) {
     pollSerial();
+#if QUEUE_ENABLED && !WIFI_DISABLED
+    queue::tick();
+#endif
     delay(10);
   }
 }
@@ -205,11 +222,18 @@ void setup() {
 #if WIFI_DISABLED
   Serial.println("esp32-home: fan BLE test (no WiFi)");
 #else
-  Serial.println("esp32-home: WiZ guard + fan BLE (24/7)");
+  Serial.println("esp32-home: WiZ guard + fan BLE + Alexa queue (24/7)");
 #endif
 
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
+
+#if !WIFI_DISABLED
+  connectWifi();
+  if (wifiConnected) {
+    syncTime();
+  }
+#endif
 
 #if WIZ_GUARD_ENABLED
   wiz::begin(BULB_IP, WIZ_PORT);
@@ -221,13 +245,6 @@ void setup() {
       POLL_SECONDS);
 #endif
 
-#if !WIFI_DISABLED
-  connectWifi();
-  if (wifiConnected) {
-    syncTime();
-  }
-#endif
-
 #if FAN_BLE_SERIAL_ENABLED
 #if !WIFI_DISABLED
   fan::setWifiHooks(pauseWifiForBle, resumeWifiAfterBle);
@@ -236,6 +253,10 @@ void setup() {
 #endif
   Serial.println("Serial ready. Type help.");
   fan::printHelp();
+#endif
+
+#if !WIFI_DISABLED && QUEUE_ENABLED
+  queue::begin();
 #endif
 }
 
@@ -252,6 +273,9 @@ void loop() {
     }
     syncTime();
   }
+#if QUEUE_ENABLED
+  queue::tick();
+#endif
 #endif
 
 #if !WIZ_GUARD_ENABLED
