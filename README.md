@@ -15,7 +15,9 @@ Open-source terms apply only inside [whatcable/](whatcable/): upstream WhatCable
 | Folder | Description |
 |--------|-------------|
 | [wiz-night-guard](wiz-night-guard/) | WiZ bulb watchdog: arm after off, force off on power blips overnight |
-| [whatcable](whatcable/) | Fork of [WhatCable](https://github.com/darrylmorley/whatcable) with a live power-monitor CLI plugin (not official WhatCable / not Pro) |
+| [jingyuan-fan-lamp](jingyuan-fan-lamp/) | Jingyuan chandelier BLE bridge + Alexa hosting queue |
+| [esp32-home](esp32-home/) | ESP32-C6 firmware (WiZ guard, fan BLE - in progress) |
+| [whatcable](whatcable/) | Fork of [WhatCable](https://github.com/darrylmorley/whatcable) with a live power-monitor CLI plugin |
 
 ## Add a new automation
 
